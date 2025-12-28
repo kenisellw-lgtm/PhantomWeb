@@ -32,23 +32,23 @@ def generate():
         print(f"🎵 Received file: {file.filename}")
         print(f"🎵 Prompt: {prompt}")
 
-        # --- THE FIX: SAVE FILE TEMPORARILY ---
-        # We must save the file to disk so Replicate can read it properly
+        # 3. Save file temporarily
         temp_filename = "temp_upload.wav"
         file.save(temp_filename)
-        
-        # Open the saved file and send it
         input_file = open(temp_filename, "rb")
 
-        # 3. Send to Replicate
+        # 4. Send to Replicate (UPDATED MODEL ID)
         print("📡 Sending to Replicate...")
+        
         output = replicate.run(
-            "meta/musicgen-remix:2541baf69a23f87a885d576a029b360b73c24d101d244670081e74f0775d733e",
+            # This is the Official Meta MusicGen (Melody/Stereo) Version
+            "meta/musicgen:671ac645ce5e552cc63a54a2bbff63fcf798043055d2dac5fc9e36a837eedcfb",
             input={
-                "input_audio": input_file,  # Send the OPENED file, not the request object
+                "input_audio": input_file,
                 "prompt": prompt,
                 "duration": 30,
-                "model_version": "stereo-large"
+                "model_version": "stereo-melody-large", # Crucial for Remixing!
+                "normalization_strategy": "peak"
             }
         )
         
@@ -58,7 +58,3 @@ def generate():
     except Exception as e:
         print(f"❌ Error: {e}")
         return jsonify({"error": str(e)}), 500
-
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host='0.0.0.0', port=port)
