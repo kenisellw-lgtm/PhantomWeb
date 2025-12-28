@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phantom Trax | AI Remix Engine</title>
+    <link rel="stylesheet" href="/static/style.css">
+    
+    </head>
+<body>
+
+    <div class="main-container">
+        <header>
+            <h1>👻 Phantom Trax</h1>
+            <p>Professional AI Audio Remix Engine</p>
+        </header>
+
+        <div class="remix-card">
+            <div class="form-group">
+                <label>1. Upload Source Audio</label>
+                <input type="file" id="audioInput" accept="audio/*">
+            </div>
+
+            <div class="form-group">
+                <label>2. Describe the Vibe</label>
+                <input type="text" id="promptInput" placeholder="e.g. Dark trap, 140bpm, industrial techno...">
+            </div>
+
+            <button onclick="startRemix()" id="generateBtn">🚀 Generate Remix</button>
+            <p id="statusText"></p>
+        </div>
+
+        <div id="resultArea" class="result-card" style="display:none;">
+            <h3>🎧 Remix Complete</h3>
+            <audio id="audioPlayer" controls></audio>
+            <br>
+            <a id="downloadLink" href="#" target="_blank" class="download-btn">⬇️ Download WAV</a>
+        </div>
+        
+        <div class="ad-banner">
+            <p>Ad Space (Support Us)</p>
+        </div>
+
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

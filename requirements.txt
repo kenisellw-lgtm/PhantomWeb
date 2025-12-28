@@ -1,0 +1,4 @@
+flask
+replicate
+python-dotenv
+gunicorn
